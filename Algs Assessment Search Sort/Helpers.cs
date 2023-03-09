@@ -19,9 +19,9 @@ namespace Algs_Assessment_Search_Sort
             {
                 //display heading and iterate to show options
                 Console.WriteLine(heading);
-                for (int i = 1; i <= options.Length; i++)
+                for (int i = 0; i < options.Length; i++)
                 {
-                    Console.WriteLine("{0}: {1}",i,options[i]);
+                    Console.WriteLine("{0}: {1}",i+1,options[i]);
                 }
                 Console.Write(">");
                 //take user input
@@ -54,5 +54,19 @@ namespace Algs_Assessment_Search_Sort
 
             return output;
         }
+        public static bool CheckSorted(int[] array)//checks to see if array is sorted in ascending order
+        {
+            //I chose to use only ascending to simplify the logic
+            //iterate through the array
+            for (int i = 0; i < array.Length-1; i++)
+            {
+                if (array[i] > array[i + 1])
+                {
+                    return false; //if sorted ascending no value will be greater than the one after it
+                }
+            }
+            return true;
+        }
+
     }
 }
