@@ -38,7 +38,6 @@
         }
         static void Main(string[] args)
         {
-
             bool exit = false;
             while (!exit)
             {
