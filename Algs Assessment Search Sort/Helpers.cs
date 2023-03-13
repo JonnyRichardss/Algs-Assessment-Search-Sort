@@ -40,7 +40,7 @@ namespace Algs_Assessment_Search_Sort
 
             return output;
         }
-        public static int[] ReadFile(string path)
+        public static int[] ReadFile(string path) //reads file full of integers on separate lines into a int[] array
         {
             //read in file as string
             string[] lines = File.ReadAllLines(path);
@@ -49,7 +49,10 @@ namespace Algs_Assessment_Search_Sort
             int tempint;
             for (int i=0;i<lines.Length; i++)
             {
-                if (int.TryParse(lines[i],out tempint)) output[i] = tempint; //using this method as it is exception proof - not really necessary as known data will always be used
+                if (int.TryParse(lines[i], out tempint))
+                {
+                    output[i] = tempint; //using this method as it is exception proof - not really necessary as known data will always be used
+                }
             }
 
             return output;

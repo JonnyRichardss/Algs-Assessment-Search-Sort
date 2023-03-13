@@ -2,18 +2,24 @@
 {
     internal class Program
     {
-        //Task 1 Read in all files (including task 5 elements too)
-        static int[] road1_256 = Helpers.ReadFile("Road_1_256.txt");
-        static int[] road1_2048 = Helpers.ReadFile("Road_1_2048.txt");
-        static int[] road2_256 = Helpers.ReadFile("Road_2_256.txt");
-        static int[] road2_2048 = Helpers.ReadFile("Road_2_2048.txt");
-        static int[] road3_256 = Helpers.ReadFile("Road_3_256.txt");
-        static int[] road3_2048 = Helpers.ReadFile("Road_3_2048.txt");
-        static int[][] roads = { road1_256, road1_2048, road2_256, road2_2048, road3_256, road3_2048 };// array of references to the loaded arrays
-        static string[] filenames = { "Road_1_256.txt", "Road_1_2048.txt", "Road_2_256.txt", "Road_2_2048.txt", "Road_3_256.txt", "Road_3_2048.txt" }; //array of source file names
+
+        static int[] road1_256, road2_256, road3_256;
+        static int[] road1_2048, road2_2048, road3_2048;
+        static int[][] roads_256 = { road1_256, road2_256, road3_256};// array of references to the loaded arrays
+        static int[][] roads_2048 = {road1_2048, road2_2048, road3_2048};
+        static string[] filenames_256 = { "Road_1_256.txt",  "Road_2_256.txt",  "Road_3_256.txt", }; //array of source file names
+        static string[] filenames_2048 = { "Road_1_2048.txt", "Road_2_2048.txt", "Road_3_2048.txt" };
+        static void Task1()
+        {
+            //Task 1 Read in all 256 length file
+            for (int i = 0; i < roads_256.Length; i++)
+            {
+                roads_256[i] = Helpers.ReadFile(filenames_256[i]);
+            }
+        }
         static void Task2()
         {
-            int[] array = roads[Helpers.intMenu("Choose a file to sort and display", filenames)-1];
+            int[] array = roads_256[Helpers.intMenu("Choose a file to sort and display", filenames_256)-1];
             Console.WriteLine("Sorting array");
 
             Algs.Sort(ref array);
@@ -36,8 +42,35 @@
             Console.WriteLine("Ascending: "+ascendingout);
             Console.WriteLine("Descending "+descendingout);
         }
+        static void Task3()
+        {
+
+        }
+        static void Task4()
+        {
+
+        }
+        static void Task5()
+        {
+            //Task 5 Read in all 2048 length file
+            for (int i = 0; i < roads_2048.Length; i++)
+            {
+                roads_2048[i] = Helpers.ReadFile(filenames_2048[i]);
+            }
+        }
+        static void Task6()
+        {
+
+        }
+        static void Task7() 
+        { 
+
+        }
+
         static void Main(string[] args)
         {
+            Task1();
+            Task5();
             bool exit = false;
             while (!exit)
             {
