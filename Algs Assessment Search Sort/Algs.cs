@@ -17,5 +17,60 @@ namespace Algs_Assessment_Search_Sort
         {
             Array.Sort(array); //temp to test things
         }
+        public static void MergeSort(ref int[] array)
+        {
+            if(array.Length == 1)
+            {
+                return;
+            }
+            int i1 = array.Length / 2;
+            int i2 = array.Length - i1;
+
+            int[] lefthalf = new int[array.Length/2];
+            int[] righthalf = new int[array.Length -lefthalf.Length];
+
+            Array.Copy(array, 0, lefthalf, 0, i1);
+            Array.Copy(array, i1, righthalf, 0, i2);
+
+            MergeSort(ref lefthalf);
+            MergeSort(ref righthalf);
+
+            array = Merge(lefthalf, righthalf);
+        }
+        public static int[] Merge(int[] aL, int[] aR)
+        {
+            int[] output = new int[aL.Length + aR.Length];
+            int indexL = 0;
+            int indexR = 0;
+            int outputIndex = 0;
+            while (indexL < aL.Length && indexR < aR.Length)
+            {
+                if (aL[indexL] < aR[indexR])
+                {
+                    output[outputIndex] = aL[indexL];
+                    indexL++;
+                    outputIndex++;
+                }
+                else
+                {
+                    output[outputIndex] = aR[indexR];
+                    indexR++;
+                    outputIndex++;
+                }
+            }
+            while (indexL < aL.Length)
+            {
+                output[outputIndex] = aL[indexL];
+                indexL++;
+                outputIndex++;
+            }
+            while (indexR < aR.Length)
+            {
+                output[outputIndex] = aR[indexR];
+                indexR++;
+                outputIndex++;
+            }
+            return output;
+        }
     }
 }
