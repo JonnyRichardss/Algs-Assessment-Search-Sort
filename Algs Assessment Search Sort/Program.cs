@@ -45,10 +45,10 @@
             Console.Write("Descending: "); Console.WriteLine(descendingout);
 
         }
-        static void Task3()
+        static void Task3(ref int[] array)
         {
-            int index = Helpers.intMenu("Choose a file to search:", filenames_256) - 1;
-            int[] array = roads_256[index];
+            //int index = Helpers.intMenu("Choose a file to search:", filenames_256) - 1;
+           // int[] array = roads_256[index];
             Console.WriteLine("Checking if array is sorted...");
             if (!Helpers.CheckSorted(array))
             {
@@ -56,8 +56,22 @@
                 Algs.MergeSort(ref array);
             }
             Console.Write("Proceeding to search! ");
-            int searchIndex = Helpers.intInput();
-            //search here
+            int searchInput = Helpers.intInput();
+            int foundIndex = Algs.TempSearch(array, searchInput);
+            if (foundIndex > 0)
+            {
+                List<int> foundList = new List<int>();
+                Helpers.AddEqualNeighbours(ref foundList, array, foundIndex);
+                Console.WriteLine("Found {0} at the following positions:",searchInput);
+                foreach (int i in foundList)
+                {
+                    Console.WriteLine(i);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Input not found!");
+            }
         }
         static void Task4()
         {
@@ -82,6 +96,8 @@
 
         static void Main(string[] args)
         {
+            int[] testarray = { 0, 0, 1, 1, 1, 1, 2, 2, 3 };
+            Task3(ref testarray);
             Task1();
             Task5();
             bool exit = false;

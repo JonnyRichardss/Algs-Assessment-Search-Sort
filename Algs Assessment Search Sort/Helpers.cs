@@ -87,6 +87,35 @@ namespace Algs_Assessment_Search_Sort
             }
             return true;
         }
+        //THIS NEEDS CHANGING TO BOOL
+        public static void AddEqualNeighbours(ref List<int> equalIndices, in int[] array, int index)
+        {
+            if (!(equalIndices.Contains(index)))
+            {
+                equalIndices.Add(index);
+                try
+                {
+                    if (array[index] == array[index - 1])
+                    {
+                        AddEqualNeighbours(ref equalIndices, array, index - 1);
+                    }
+                }
+                catch (IndexOutOfRangeException)
+                {
 
+                }
+                try
+                {
+                    if (array[index] == array[index + 1])
+                    {
+                        AddEqualNeighbours(ref equalIndices, array, index + 1);
+                    }
+                }
+                catch (IndexOutOfRangeException)
+                {
+
+                }
+            }
+        }
     }
 }
