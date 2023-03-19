@@ -46,13 +46,9 @@ namespace Algs_Assessment_Search_Sort
             string[] lines = File.ReadAllLines(path);
             //convert to int
             int[] output = new int[lines.Length];
-            int tempint;
             for (int i=0;i<lines.Length; i++)
             {
-                if (int.TryParse(lines[i], out tempint))
-                {
-                    output[i] = tempint; //using this method as it is exception proof - not really necessary as known data will always be used
-                }
+                output[i] = int.Parse(lines[i]);
             }
 
             return output;

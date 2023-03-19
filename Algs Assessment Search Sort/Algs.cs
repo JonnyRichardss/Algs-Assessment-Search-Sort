@@ -9,14 +9,6 @@ namespace Algs_Assessment_Search_Sort
     internal static class Algs
     {
         //decided to make these int-only based on the given data for the assessment
-        public static int Search(in int[] array,int key) 
-        {
-            return Array.IndexOf(array,key); //temp to test things
-        }
-        public static void Sort(ref int[] array)
-        {
-            Array.Sort(array); //temp to test things
-        }
         public static void MergeSort(ref int[] array)
         {
             if(array.Length == 1)
@@ -72,5 +64,16 @@ namespace Algs_Assessment_Search_Sort
             }
             return output;
         }
+        //PLS PLS PLS REMEMBER TO AT LEAST COMMENT THESE OUT BEFORE YOU SUMBIT OMG
+        // /*
+        public static int TempSearch(in int[] array, int key)
+        {
+            return Array.IndexOf(array, key); //temp to test things
+        }
+        public static void TempSort(ref int[] array)
+        {
+            Array.Sort(array); //temp to test things
+        }
+        // */
     }
 }

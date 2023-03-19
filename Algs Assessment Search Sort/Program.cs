@@ -22,14 +22,14 @@
             int[] array = roads_256[Helpers.intMenu("Choose a file to sort and display", filenames_256)-1];
             Console.WriteLine("Sorting array");
 
-            Algs.Sort(ref array);
+            Algs.TempSort(ref array);
 
             int[] descArray = new int[array.Length];
             array.CopyTo(descArray, 0);
             Array.Reverse(descArray);
 
-            string ascendingout = "";
-            string descendingout = "";
+            string ascendingout = "Ascending: ";
+            string descendingout = "Descending: ";
             for (int i = 0; i < array.Length; i++)
             {
                 if(i %10 == 0)
@@ -39,8 +39,8 @@
                 }
             }
             Console.WriteLine("Displaying every 10th value:");
-            Console.WriteLine("Ascending: "+ascendingout);
-            Console.WriteLine("Descending "+descendingout);
+            Console.WriteLine(ascendingout);
+            Console.WriteLine(descendingout);
         }
         static void Task3()
         {
