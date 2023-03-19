@@ -19,17 +19,18 @@
         }
         static void Task2()
         {
-            int[] array = roads_256[Helpers.intMenu("Choose a file to sort and display", filenames_256)-1];
-            Console.WriteLine("Sorting array");
-
+            int index = Helpers.intMenu("Choose a file to sort and display:", filenames_256) - 1;
+            int[] array = roads_256[index];
+            Console.WriteLine("Sorting array...");
             Algs.TempSort(ref array);
+            
 
             int[] descArray = new int[array.Length];
             array.CopyTo(descArray, 0);
             Array.Reverse(descArray);
 
-            string ascendingout = "Ascending: ";
-            string descendingout = "Descending: ";
+            string ascendingout = "";
+            string descendingout = "";
             for (int i = 0; i < array.Length; i++)
             {
                 if(i %10 == 0)
@@ -39,12 +40,24 @@
                 }
             }
             Console.WriteLine("Displaying every 10th value:");
-            Console.WriteLine(ascendingout);
-            Console.WriteLine(descendingout);
+            //These are hacked together like this in case I want to add ConsoleColor
+            Console.Write("Ascending: "); Console.WriteLine(ascendingout);
+            Console.Write("Descending: "); Console.WriteLine(descendingout);
+
         }
         static void Task3()
         {
-
+            int index = Helpers.intMenu("Choose a file to search:", filenames_256) - 1;
+            int[] array = roads_256[index];
+            Console.WriteLine("Checking if array is sorted...");
+            if (!Helpers.CheckSorted(array))
+            {
+                Console.WriteLine("Array not sorted! Sorting array...");
+                Algs.MergeSort(ref array);
+            }
+            Console.Write("Proceeding to search! ");
+            int searchIndex = Helpers.intInput();
+            //search here
         }
         static void Task4()
         {
