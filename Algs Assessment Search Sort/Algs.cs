@@ -9,6 +9,30 @@ namespace Algs_Assessment_Search_Sort
     internal static class Algs
     {
         //decided to make these int-only based on the given data for the assessment
+        public static int BinarySearch(in int[] array,int key)
+        {
+            //iterative implementation chosed because i like the arguments better :)
+            int lo = 0;
+            int hi = array.Length-1;
+            int mid = (hi + lo)/2;
+            while(lo < hi)
+            {
+                if (array[mid] == key)
+                {
+                    return mid;
+                }
+                else if (array[mid] < key)
+                {
+                    lo = mid + 1;
+                }
+                else if (array[mid] > key)
+                {
+                    hi = mid - 1;
+                }
+                mid = (hi + lo)/2;
+            }
+            return -mid;
+        }
         public static void MergeSort(ref int[] array)
         {
             if(array.Length == 1)

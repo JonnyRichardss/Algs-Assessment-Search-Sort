@@ -56,27 +56,29 @@ namespace Algs_Assessment_Search_Sort
             int searchInput = Helpers.intInput();
             int searchResult = Algs.TempSearch(array, searchInput);
 
-            if (task3)
+            if (searchResult > 0)
             {
-                if (searchResult > 0)
+                List<int> foundList = new List<int>();
+                Helpers.AddEqualNeighbours(ref foundList, array, searchResult);
+                Console.WriteLine("Found {0} at the following positions:", searchInput);
+                foreach (int i in foundList)
                 {
-                    List<int> foundList = new List<int>();
-                    Helpers.AddEqualNeighbours(ref foundList, array, searchResult);
-                    Console.WriteLine("Found {0} at the following positions:", searchInput);
-                    foreach (int i in foundList)
-                    {
-                        Console.WriteLine(i);
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Input not found!");
+                    Console.WriteLine(i);
                 }
             }
             else
             {
-                //task 4 stuff
+                if (task3)
+                {
+                    Console.WriteLine("Input not found!");
+                }
+                else
+                {
+                    searchResult = 0 - searchResult;
+                    Console.WriteLine("Nearest value {0} found at {1}!", array[searchResult], searchResult);
+                }
             }
+
         }
         public static int[] Merging(int[] array1, int[] array2)
         {

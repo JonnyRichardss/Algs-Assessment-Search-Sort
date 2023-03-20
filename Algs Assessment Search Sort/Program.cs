@@ -108,6 +108,7 @@
         static void Main(string[] args)
         {
             bool exit = false;
+            int[] testArray = { 0, 0, 1, 1, 1, 1, 2, 2, 3, 3 };
             while (!exit)
             {
                 string[] menuoptions = 
