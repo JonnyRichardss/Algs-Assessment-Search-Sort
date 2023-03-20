@@ -50,7 +50,6 @@
             }
 
         }
-        
         static void Task4()
         {
             int index = Helpers.intMenu("Choose a file to search:", filenames_256);
@@ -104,7 +103,6 @@
             Tasks.Searching(ref mergedarray, true);
             Tasks.Searching(ref mergedarray, false);
         }
-
         static void Main(string[] args)
         {
             bool exit = false;
@@ -148,7 +146,7 @@
                         break;
                     case 8:
                         exit = true;
-                        continue;
+                        break;
                 }
             }
         }

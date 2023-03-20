@@ -87,7 +87,6 @@ namespace Algs_Assessment_Search_Sort
             }
             return true;
         }
-        //THIS NEEDS CHANGING TO BOOL
         public static void AddEqualNeighbours(ref List<int> equalIndices, in int[] array, int index)
         {
             if (!(equalIndices.Contains(index)))

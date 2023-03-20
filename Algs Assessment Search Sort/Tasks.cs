@@ -25,7 +25,7 @@ namespace Algs_Assessment_Search_Sort
             Algs.MergeSort(ref array,ref steps);
             Console.WriteLine("Merge sorted in {0} steps!", steps);
 
-            //this needs changing
+            //this needs changing to a full sort
             int[] descArray = new int[array.Length];
             array.CopyTo(descArray, 0);
             Array.Reverse(descArray);
@@ -46,6 +46,7 @@ namespace Algs_Assessment_Search_Sort
             Console.Write("Ascending: "); Console.WriteLine(ascendingout);
             Console.Write("Descending: "); Console.WriteLine(descendingout);
         }
+
         public static void Searching(ref int[] array,bool task3)
         {
             Console.WriteLine("Checking if array is sorted...");
@@ -56,9 +57,10 @@ namespace Algs_Assessment_Search_Sort
                 Algs.MergeSort(ref array, ref steps);
                 Console.WriteLine("Merge sorted in {0} steps!", steps);
             }
+
             Console.WriteLine("Proceeding to binary search!");
             int searchInput = Helpers.intInput();
-            int searchResult = Algs.TempSearch(array, searchInput);
+            int searchResult = Algs.BinarySearch(array, searchInput);
 
             if (searchResult > 0)
             {
@@ -82,11 +84,11 @@ namespace Algs_Assessment_Search_Sort
                     Console.WriteLine("Nearest value {0} found at {1}!", array[searchResult], searchResult);
                 }
             }
-
         }
+
         public static int[] Merging(int[] array1, int[] array2)
         {
-            Console.WriteLine("Checking if arrays are sorted (must be sorted to merge)...");
+            Console.WriteLine("Checking if arrays are sorted...");
             if (!Helpers.CheckSorted(array1))
             {
                 Console.WriteLine("Array 1 not sorted! Sorting array...");

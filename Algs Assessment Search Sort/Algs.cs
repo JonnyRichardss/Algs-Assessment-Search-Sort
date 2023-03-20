@@ -45,6 +45,7 @@ namespace Algs_Assessment_Search_Sort
                 return lo;
             }
         }
+
         public static void MergeSort(ref int[] array,ref int steps)
         {
             steps++;
@@ -100,12 +101,5 @@ namespace Algs_Assessment_Search_Sort
             }
             return output;
         }
-        //PLS PLS PLS REMEMBER TO AT LEAST COMMENT THESE OUT BEFORE YOU SUMBIT OMG
-        // /*
-        public static int TempSearch(in int[] array, int key)
-        {
-            return Array.IndexOf(array, key); //temp to test things
-        }
-        // */
     }
 }
