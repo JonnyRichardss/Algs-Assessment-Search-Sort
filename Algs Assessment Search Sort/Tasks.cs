@@ -21,7 +21,9 @@ namespace Algs_Assessment_Search_Sort
                 displayInterval = 50;
             }
             Console.WriteLine("Sorting array...");
-            Algs.MergeSort(ref array);
+            int steps = 0;
+            Algs.MergeSort(ref array,ref steps);
+            Console.WriteLine("Merge sorted in {0} steps!", steps);
 
             //this needs changing
             int[] descArray = new int[array.Length];
@@ -50,7 +52,9 @@ namespace Algs_Assessment_Search_Sort
             if (!Helpers.CheckSorted(array))
             {
                 Console.WriteLine("Array not sorted! Sorting array...");
-                Algs.MergeSort(ref array);
+                int steps = 0;
+                Algs.MergeSort(ref array, ref steps);
+                Console.WriteLine("Merge sorted in {0} steps!", steps);
             }
             Console.WriteLine("Proceeding to binary search!");
             int searchInput = Helpers.intInput();
@@ -86,12 +90,16 @@ namespace Algs_Assessment_Search_Sort
             if (!Helpers.CheckSorted(array1))
             {
                 Console.WriteLine("Array 1 not sorted! Sorting array...");
-                Algs.MergeSort(ref array1);
+                int steps = 0;
+                Algs.MergeSort(ref array1, ref steps);
+                Console.WriteLine("Merge sorted in {0} steps!", steps);
             }
             if (!Helpers.CheckSorted(array2))
             {
                 Console.WriteLine("Array 2 not sorted! Sorting array...");
-                Algs.MergeSort(ref array2);
+                int steps = 0;
+                Algs.MergeSort(ref array2, ref steps);
+                Console.WriteLine("Merge sorted in {0} steps!", steps);
             }
             return Algs.Merge(array1, array2);
         }

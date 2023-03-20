@@ -108,7 +108,8 @@
         static void Main(string[] args)
         {
             bool exit = false;
-            int[] testArray = { 0, 0, 1, 1, 1, 1, 2, 2, 3, 3 };
+            int[] testArray = { 0, 0, 1, 1, 1, 1, 4, 4, 4,5 };
+            Console.WriteLine(Algs.BinarySearch(testArray, 2));
             while (!exit)
             {
                 string[] menuoptions = 

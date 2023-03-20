@@ -11,7 +11,7 @@ namespace Algs_Assessment_Search_Sort
         //decided to make these int-only based on the given data for the assessment
         public static int BinarySearch(in int[] array,int key)
         {
-            //iterative implementation chosed because i like the arguments better :)
+            //iterative implementation chosen because i like the arguments better :)
             int lo = 0;
             int hi = array.Length-1;
             int mid = (hi + lo)/2;
@@ -21,7 +21,8 @@ namespace Algs_Assessment_Search_Sort
                 {
                     return mid;
                 }
-                else if (array[mid] < key)
+
+                if (array[mid] < key)
                 {
                     lo = mid + 1;
                 }
@@ -33,8 +34,20 @@ namespace Algs_Assessment_Search_Sort
             }
             return -mid;
         }
-        public static void MergeSort(ref int[] array)
+        public static int GetClosest(int lo,int hi, int key)
         {
+            if(key-lo > hi - key)
+            {
+                return hi;
+            }
+            else
+            {
+                return lo;
+            }
+        }
+        public static void MergeSort(ref int[] array,ref int steps)
+        {
+            steps++;
             if(array.Length == 1)
             {
                 return;
@@ -48,8 +61,8 @@ namespace Algs_Assessment_Search_Sort
             Array.Copy(array, 0, lefthalf, 0, i1);
             Array.Copy(array, i1, righthalf, 0, i2);
 
-            MergeSort(ref lefthalf);
-            MergeSort(ref righthalf);
+            MergeSort(ref lefthalf,ref steps);
+            MergeSort(ref righthalf,ref steps);
             Merge(lefthalf, righthalf).CopyTo(array, 0);
         }
         public static int[] Merge(int[] aL, int[] aR)
@@ -92,10 +105,6 @@ namespace Algs_Assessment_Search_Sort
         public static int TempSearch(in int[] array, int key)
         {
             return Array.IndexOf(array, key); //temp to test things
-        }
-        public static void TempSort(ref int[] array)
-        {
-            Array.Sort(array); //temp to test things
         }
         // */
     }
