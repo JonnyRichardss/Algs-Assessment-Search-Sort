@@ -2,138 +2,74 @@
 {
     internal class Program
     {
-        static string[] filenames = { "Road_1_256.txt", "Road_2_256.txt", "Road_3_256.txt", "Road_1_2048.txt", "Road_2_2048.txt", "Road_3_2048.txt" }; //array of source file names
+        static string[] filenames_256 = {"Road_1_256.txt", "Road_2_256.txt", "Road_3_256.txt"}; //array of source file names
+        static string[] filenames_2048 = {"Road_1_2048.txt", "Road_2_2048.txt", "Road_3_2048.txt"};
         //TASK 1 - Import 256 Length Files
-        static int[] road1_256 = Helpers.ReadFile(filenames[0]);
-        static int[] road2_256 = Helpers.ReadFile(filenames[1]);
-        static int[] road3_256 = Helpers.ReadFile(filenames[2]);
+        static int[] road1_256 = Helpers.ReadFile(filenames_256[0]);
+        static int[] road2_256 = Helpers.ReadFile(filenames_256[1]);
+        static int[] road3_256 = Helpers.ReadFile(filenames_256[2]);
         //TASK 5 - Import 2048 Length Files
-        static int[] road1_2048 = Helpers.ReadFile(filenames[3]);
-        static int[] road2_2048 = Helpers.ReadFile(filenames[4]);
-        static int[] road3_2048 = Helpers.ReadFile(filenames[5]);
-
+        static int[] road1_2048 = Helpers.ReadFile(filenames_2048[0]);
+        static int[] road2_2048 = Helpers.ReadFile(filenames_2048[1]);
+        static int[] road3_2048 = Helpers.ReadFile(filenames_2048[2]);
+        
+        static void Task1()
+        {
+            Console.WriteLine("Arrays were already imported at program start!");
+        }
         static void Task2()
         {
-            int index = Helpers.intMenu("Choose a file to sort and display:", filenames);
-            int[] array;
+            int index = Helpers.intMenu("Choose a file to sort and display:", filenames_256);
             switch (index)
             {
                 case 1:
-                    array = road1_256;
+                    Tasks.Sorting(ref road1_256);
                     break;
                 case 2:
-                    array = road2_256;
+                    Tasks.Sorting(ref road2_256);
                     break;
                 case 3:
-                    array = road3_256;
-                    break;
-                case 4:
-                    array = road1_2048;
-                    break;
-                case 5:
-                    array = road2_2048;
-                    break;
-                case 6:
-                    array = road3_2048;
-                    break;
-                default:
-                    //this stops the compiler whining at me it *shouldn't* ever run thanks to error checking in intMenu()
-                    array = new int[0];
+                    Tasks.Sorting(ref road3_256);
                     break;
             }
-
-            int displayInterval;
-            if (array.Length < 2048)
-            {
-                displayInterval = 10;
-            }
-            else
-            {
-                displayInterval = 50;
-            }
-            Console.WriteLine("Sorting array...");
-            Algs.MergeSort(ref array);
-            
-            //this needs changing
-            int[] descArray = new int[array.Length];
-            array.CopyTo(descArray, 0);
-            Array.Reverse(descArray);
-
-            string ascendingout = "";
-            string descendingout = "";
-
-            for (int i = 0; i < array.Length; i++)
-            {
-                if(i %displayInterval == 0)
-                {
-                    ascendingout += String.Format(" {0} ", array[i]);
-                    descendingout += String.Format(" {0} ", descArray[i]);
-                }
-            }
-            Console.WriteLine("Displaying every {0}th value:",displayInterval);
-            //These are hacked together like this in case I want to add ConsoleColor
-            Console.Write("Ascending: "); Console.WriteLine(ascendingout);
-            Console.Write("Descending: "); Console.WriteLine(descendingout);
-
         }
-        
         static void Task3()
         {
-            int index = Helpers.intMenu("Choose a file to search:", filenames);
-            int[] array;
+            int index = Helpers.intMenu("Choose a file to search:", filenames_256);
             switch (index)
             {
                 case 1:
-                    array = road1_256;
+                    Tasks.Searching(ref road1_256,true);
                     break;
                 case 2:
-                    array = road2_256;
+                    Tasks.Searching(ref road2_256,true);
                     break;
                 case 3:
-                    array = road3_256;
-                    break;
-                case 4:
-                    array = road1_2048;
-                    break;
-                case 5:
-                    array = road2_2048;
-                    break;
-                case 6:
-                    array = road3_2048;
-                    break;
-                default:
-                    //this stops the compiler whining at me it *shouldn't* ever run thanks to error checking in intMenu()
-                    array = new int[0];
+                    Tasks.Searching(ref road3_256,true);
                     break;
             }
-            Console.WriteLine("Checking if array is sorted...");
-            if (!Helpers.CheckSorted(array))
-            {
-                Console.WriteLine("Array not sorted! Sorting array...");
-                Algs.MergeSort(ref array);
-            }
-            Console.Write("Proceeding to search! ");
-            int searchInput = Helpers.intInput();
-            int foundIndex = Algs.TempSearch(array, searchInput);
-            if (foundIndex > 0)
-            {
-                List<int> foundList = new List<int>();
-                Helpers.AddEqualNeighbours(ref foundList, array, foundIndex);
-                Console.WriteLine("Found {0} at the following positions:",searchInput);
-                foreach (int i in foundList)
-                {
-                    Console.WriteLine(i);
-                }
-            }
-            else
-            {
-                Console.WriteLine("Input not found!");
-            }
+
         }
         
         static void Task4()
         {
-
+            int index = Helpers.intMenu("Choose a file to search:", filenames_256);
+            switch (index)
+            {
+                case 1:
+                    Tasks.Searching(ref road1_256, false);
+                    break;
+                case 2:
+                    Tasks.Searching(ref road2_256, false);
+                    break;
+                case 3:
+                    Tasks.Searching(ref road3_256, false);
+                    break;
+            }
+        }
+        static void Task5()
+        {
+            Console.WriteLine("Arrays were already imported at program start!");
         }
         static void Task6()
         {
@@ -149,16 +85,41 @@
             bool exit = false;
             while (!exit)
             {
-                string[] menuoptions = { "Task 2 - sort and display digits at interval.","Task 3 - search for a value in a list.", "Exit." };
+                string[] menuoptions = 
+                {
+                    "Task 1 - Import 256 length arrays", 
+                    "Task 2 - Sort and display digits at interval",
+                    "Task 3 - Search for a value in a list (error if not found)",
+                    "Task 4 - Search for a value in a list (nearest values if not found)",
+                    "Task 5 - Repeat tasks 1-4 with 2048 Length arrays",
+                    "Task 6 - Merge arrays and repeat tasks 2-4 on merged arrays",
+                    "Task 7 - Repeat task 6 with 2048 Length arrays",
+                    "Exit."
+                };
                 switch (Helpers.intMenu("Choose a function:", menuoptions))
                 {
                     case 1:
-                        Task2();
+                        Task1();
                         break;
                     case 2:
-                        Task3();
+                        Task2();
                         break;
                     case 3:
+                        Task3();
+                        break;
+                    case 4:
+                        Task4();
+                        break;
+                    case 5:
+                        Task5();
+                        break;
+                    case 6:
+                        Task6();
+                        break;
+                    case 7:
+                        Task7();
+                        break;
+                    case 8:
                         exit = true;
                         continue;
                 }
