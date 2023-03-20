@@ -2,53 +2,110 @@
 {
     internal class Program
     {
+        static string[] filenames = { "Road_1_256.txt", "Road_2_256.txt", "Road_3_256.txt", "Road_1_2048.txt", "Road_2_2048.txt", "Road_3_2048.txt" }; //array of source file names
+        //TASK 1 - Import 256 Length Files
+        static int[] road1_256 = Helpers.ReadFile(filenames[0]);
+        static int[] road2_256 = Helpers.ReadFile(filenames[1]);
+        static int[] road3_256 = Helpers.ReadFile(filenames[2]);
+        //TASK 5 - Import 2048 Length Files
+        static int[] road1_2048 = Helpers.ReadFile(filenames[3]);
+        static int[] road2_2048 = Helpers.ReadFile(filenames[4]);
+        static int[] road3_2048 = Helpers.ReadFile(filenames[5]);
 
-        static int[] road1_256, road2_256, road3_256;
-        static int[] road1_2048, road2_2048, road3_2048;
-        static int[][] roads_256 = { road1_256, road2_256, road3_256};// array of references to the loaded arrays
-        static int[][] roads_2048 = {road1_2048, road2_2048, road3_2048};
-        static string[] filenames_256 = { "Road_1_256.txt",  "Road_2_256.txt",  "Road_3_256.txt", }; //array of source file names
-        static string[] filenames_2048 = { "Road_1_2048.txt", "Road_2_2048.txt", "Road_3_2048.txt" };
-        static void Task1()
-        {
-            //Task 1 Read in all 256 length file
-            for (int i = 0; i < roads_256.Length; i++)
-            {
-                roads_256[i] = Helpers.ReadFile(filenames_256[i]);
-            }
-        }
         static void Task2()
         {
-            int index = Helpers.intMenu("Choose a file to sort and display:", filenames_256) - 1;
-            int[] array = roads_256[index];
-            Console.WriteLine("Sorting array...");
-            Algs.TempSort(ref array);
-            
+            int index = Helpers.intMenu("Choose a file to sort and display:", filenames);
+            int[] array;
+            switch (index)
+            {
+                case 1:
+                    array = road1_256;
+                    break;
+                case 2:
+                    array = road2_256;
+                    break;
+                case 3:
+                    array = road3_256;
+                    break;
+                case 4:
+                    array = road1_2048;
+                    break;
+                case 5:
+                    array = road2_2048;
+                    break;
+                case 6:
+                    array = road3_2048;
+                    break;
+                default:
+                    //this stops the compiler whining at me it *shouldn't* ever run thanks to error checking in intMenu()
+                    array = new int[0];
+                    break;
+            }
 
+            int displayInterval;
+            if (array.Length < 2048)
+            {
+                displayInterval = 10;
+            }
+            else
+            {
+                displayInterval = 50;
+            }
+            Console.WriteLine("Sorting array...");
+            Algs.MergeSort(ref array);
+            
+            //this needs changing
             int[] descArray = new int[array.Length];
             array.CopyTo(descArray, 0);
             Array.Reverse(descArray);
 
             string ascendingout = "";
             string descendingout = "";
+
             for (int i = 0; i < array.Length; i++)
             {
-                if(i %10 == 0)
+                if(i %displayInterval == 0)
                 {
                     ascendingout += String.Format(" {0} ", array[i]);
                     descendingout += String.Format(" {0} ", descArray[i]);
                 }
             }
-            Console.WriteLine("Displaying every 10th value:");
+            Console.WriteLine("Displaying every {0}th value:",displayInterval);
             //These are hacked together like this in case I want to add ConsoleColor
             Console.Write("Ascending: "); Console.WriteLine(ascendingout);
             Console.Write("Descending: "); Console.WriteLine(descendingout);
 
         }
-        static void Task3(ref int[] array)
+        
+        static void Task3()
         {
-            //int index = Helpers.intMenu("Choose a file to search:", filenames_256) - 1;
-           // int[] array = roads_256[index];
+            int index = Helpers.intMenu("Choose a file to search:", filenames);
+            int[] array;
+            switch (index)
+            {
+                case 1:
+                    array = road1_256;
+                    break;
+                case 2:
+                    array = road2_256;
+                    break;
+                case 3:
+                    array = road3_256;
+                    break;
+                case 4:
+                    array = road1_2048;
+                    break;
+                case 5:
+                    array = road2_2048;
+                    break;
+                case 6:
+                    array = road3_2048;
+                    break;
+                default:
+                    //this stops the compiler whining at me it *shouldn't* ever run thanks to error checking in intMenu()
+                    array = new int[0];
+                    break;
+            }
             Console.WriteLine("Checking if array is sorted...");
             if (!Helpers.CheckSorted(array))
             {
@@ -73,17 +130,10 @@
                 Console.WriteLine("Input not found!");
             }
         }
+        
         static void Task4()
         {
 
-        }
-        static void Task5()
-        {
-            //Task 5 Read in all 2048 length file
-            for (int i = 0; i < roads_2048.Length; i++)
-            {
-                roads_2048[i] = Helpers.ReadFile(filenames_2048[i]);
-            }
         }
         static void Task6()
         {
@@ -96,20 +146,19 @@
 
         static void Main(string[] args)
         {
-            int[] testarray = { 0, 0, 1, 1, 1, 1, 2, 2, 3 };
-            Task3(ref testarray);
-            Task1();
-            Task5();
             bool exit = false;
             while (!exit)
             {
-                string[] menuoptions = { "Task 2 - sort and display every 10th value.", "Exit." };
+                string[] menuoptions = { "Task 2 - sort and display digits at interval.","Task 3 - search for a value in a list.", "Exit." };
                 switch (Helpers.intMenu("Choose a function:", menuoptions))
                 {
                     case 1:
                         Task2();
                         break;
                     case 2:
+                        Task3();
+                        break;
+                    case 3:
                         exit = true;
                         continue;
                 }

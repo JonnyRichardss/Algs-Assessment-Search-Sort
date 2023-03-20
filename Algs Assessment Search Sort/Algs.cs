@@ -26,8 +26,7 @@ namespace Algs_Assessment_Search_Sort
 
             MergeSort(ref lefthalf);
             MergeSort(ref righthalf);
-
-            array = Merge(lefthalf, righthalf);
+            Merge(lefthalf, righthalf).CopyTo(array, 0);
         }
         public static int[] Merge(int[] aL, int[] aR)
         {
