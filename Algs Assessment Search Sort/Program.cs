@@ -70,14 +70,39 @@
         static void Task5()
         {
             Console.WriteLine("Arrays were already imported at program start!");
+            int index = Helpers.intMenu("Choose a file:", filenames_2048);
+            switch (index)
+            {
+                case 1:
+                    Tasks.Sorting(ref road1_2048);
+                    Tasks.Searching(ref road1_2048, true);
+                    Tasks.Searching(ref road1_2048, false);
+                    break;
+                case 2:
+                    Tasks.Sorting(ref road2_2048);
+                    Tasks.Searching(ref road2_2048, true);
+                    Tasks.Searching(ref road2_2048, false);
+                    break;
+                case 3:
+                    Tasks.Sorting(ref road3_2048);
+                    Tasks.Searching(ref road3_2048, true);
+                    Tasks.Searching(ref road3_2048, false);
+                    break;
+            }
         }
         static void Task6()
         {
-
+            int[] mergedarray = Tasks.Merging(road1_256, road3_256);
+            Tasks.Sorting(ref mergedarray);
+            Tasks.Searching(ref mergedarray, true);
+            Tasks.Searching(ref mergedarray, false);
         }
         static void Task7() 
-        { 
-
+        {
+            int[] mergedarray = Tasks.Merging(road1_2048, road3_2048);
+            Tasks.Sorting(ref mergedarray);
+            Tasks.Searching(ref mergedarray, true);
+            Tasks.Searching(ref mergedarray, false);
         }
 
         static void Main(string[] args)

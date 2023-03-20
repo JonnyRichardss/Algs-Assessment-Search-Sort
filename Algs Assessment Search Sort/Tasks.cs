@@ -78,5 +78,20 @@ namespace Algs_Assessment_Search_Sort
                 //task 4 stuff
             }
         }
+        public static int[] Merging(int[] array1, int[] array2)
+        {
+            Console.WriteLine("Checking if arrays are sorted (must be sorted to merge)...");
+            if (!Helpers.CheckSorted(array1))
+            {
+                Console.WriteLine("Array 1 not sorted! Sorting array...");
+                Algs.MergeSort(ref array1);
+            }
+            if (!Helpers.CheckSorted(array2))
+            {
+                Console.WriteLine("Array 2 not sorted! Sorting array...");
+                Algs.MergeSort(ref array2);
+            }
+            return Algs.Merge(array1, array2);
+        }
     }
 }
