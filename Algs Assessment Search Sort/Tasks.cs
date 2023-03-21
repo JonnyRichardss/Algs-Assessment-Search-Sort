@@ -60,7 +60,7 @@ namespace Algs_Assessment_Search_Sort
 
             Console.WriteLine("Proceeding to binary search!");
             int searchInput = Helpers.intInput();
-            int searchResult = Algs.BinarySearch(array, searchInput);
+            int searchResult = Algs.BinarySearchRecursive(array, searchInput);
 
             if (searchResult > 0)
             {

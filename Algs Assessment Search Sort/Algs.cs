@@ -9,30 +9,51 @@ namespace Algs_Assessment_Search_Sort
     internal static class Algs
     {
         //decided to make these int-only based on the given data for the assessment
-        public static int BinarySearch(in int[] array,int key)
+        public static int BinarySearchRecursive(in int[] array, int lo, int hi, int key, ref int counter)
         {
-            //iterative implementation chosen because i like the arguments better :)
-            int lo = 0;
-            int hi = array.Length-1;
-            int mid = (hi + lo)/2;
-            while(lo < hi)
+            int mid = (lo + hi) / 2;
+            counter++;
+            if (lo > hi)
             {
-                if (array[mid] == key)
-                {
-                    return mid;
-                }
-
-                if (array[mid] < key)
-                {
-                    lo = mid + 1;
-                }
-                else if (array[mid] > key)
-                {
-                    hi = mid - 1;
-                }
-                mid = (hi + lo)/2;
+                return (-mid);
             }
-            return -mid;
+            if (key == array[mid])
+            {
+                return mid;
+            }
+            else if (array[mid] < key)
+            {
+                if (mid < array.Length - 1 && array[mid + 1] > key)
+                {
+                    return GetClosest(array, mid, mid + 1, key);
+                }
+                else
+                {
+                    return BinarySearchRecursive(array, mid + 1, hi, key, ref counter);
+                }
+            }
+            else
+            {
+                if (mid > 0 && array[mid - 1] < key)
+                {
+                    return GetClosest(array, mid-1, mid, key);
+                }
+                else
+                {
+                    return BinarySearchRecursive(array, lo, mid - 1, key, ref counter);
+                } 
+            }
+        }
+        public static int GetClosest(in int[] array,int lo, int hi, int key)
+        {
+            if (key - array[lo] > array[hi] - key)
+            {
+                return hi;
+            }
+            else
+            {
+                return lo;
+            }
         }
         public static void MergeSort(ref int[] array,ref int steps)
         {
