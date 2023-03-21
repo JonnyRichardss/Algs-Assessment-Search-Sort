@@ -65,6 +65,37 @@ namespace Algs_Assessment_Search_Sort
                 return lo;
             }
         }
+        public static int[] SequentialSearch(in int[] array,int key)
+        {
+            List<int> foundIndices = new List<int>();
+            int nearestindex=0;
+            int nearestdistance = int.MaxValue;
+            for (int i=0; i<array.Length;i++)
+            {
+                if (array[i] == key)
+                {
+                    foundIndices.Add(i);
+                    nearestdistance = 0;
+                }
+                if (nearestdistance > 0)
+                {
+                    int newdistance = Math.Abs(array[i] - key);
+                    if (newdistance < nearestdistance)
+                    {
+                        nearestdistance = newdistance;
+                        nearestindex = i;
+                    }
+                }
+            }
+            if (foundIndices.Count == 0)
+            {
+                return new int[] { -nearestindex };
+            }
+            else
+            {
+                return foundIndices.ToArray();
+            }
+        }
         public static void MergeSort(ref int[] array,ref int counter)
         {
             counter++;
