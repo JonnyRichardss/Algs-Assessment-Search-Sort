@@ -22,10 +22,11 @@ namespace Algs_Assessment_Search_Sort
             }
             Console.WriteLine("Sorting array...");
             int steps = 0;
-            Algs.MergeSort(ref array,ref steps);
+            Algs.Sort(ref array,ref steps);
             Console.WriteLine("Merge sorted in {0} steps!", steps);
 
             //this needs changing to a full sort
+            //maybe force heap sort to "reverse" sorted array
             int[] descArray = new int[array.Length];
             array.CopyTo(descArray, 0);
             Array.Reverse(descArray);
@@ -49,25 +50,33 @@ namespace Algs_Assessment_Search_Sort
 
         public static void Searching(ref int[] array,bool task3)
         {
+            int searchInput = Helpers.intInput();
+            int steps = 0;
+            int searchResult = -1;
+            List<int> foundList = new List<int>();
             Console.WriteLine("Checking if array is sorted...");
             if (!Helpers.CheckSorted(array))
             {
-                Console.WriteLine("Array not sorted! Sorting array...");
-                int sortSteps = 0;
-                Algs.MergeSort(ref array, ref sortSteps);
-                Console.WriteLine("Merge sorted in {0} steps!", sortSteps);
+                Console.WriteLine("Array not sorted! Using sequential search.");
+                int[] foundArray = Algs.SequentialSearch(array, searchInput, ref steps);
+                if (foundArray[0] < 0)
+                {
+                    searchResult = foundArray[0];
+                }
+                else
+                {
+                    foundList.AddRange(foundArray);
+                }
             }
-
-            Console.WriteLine("Proceeding to binary search!");
-            int searchInput = Helpers.intInput();
-            int searchSteps = 0;
-            int searchResult = Algs.BinarySearch(array, 0,array.Length-1, searchInput,ref searchSteps);
-            Console.WriteLine("Binary search completed in {0} steps!", searchSteps);
-
+            else
+            {
+                Console.WriteLine("Array Sorted! Using binary search.");
+                searchResult = Algs.BinarySearch(array, 0, array.Length - 1, searchInput, ref steps);
+                Helpers.AddEqualNeighbours(ref foundList, array, searchResult);
+            }
+            Console.WriteLine("Search completed in {0} steps!", steps);
             if (searchResult > 0)
             {
-                List<int> foundList = new List<int>();
-                Helpers.AddEqualNeighbours(ref foundList, array, searchResult);
                 Console.WriteLine("Found {0} at the following positions:", searchInput);
                 foreach (int i in foundList)
                 {

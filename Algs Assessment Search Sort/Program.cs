@@ -15,7 +15,13 @@
         
         static void Task1()
         {
-            Console.WriteLine("Arrays were already imported at program start!");
+            Console.WriteLine("Task 1 - Re-Importing arrays!");
+            road1_256 = Helpers.ReadFile(filenames_256[0]);
+            road2_256 = Helpers.ReadFile(filenames_256[1]);
+            road3_256 = Helpers.ReadFile(filenames_256[2]);
+            road1_2048 = Helpers.ReadFile(filenames_2048[0]);
+            road2_2048 = Helpers.ReadFile(filenames_2048[1]);
+            road3_2048 = Helpers.ReadFile(filenames_2048[2]);
         }
         static void Task2()
         {
@@ -68,7 +74,7 @@
         }
         static void Task5()
         {
-            Console.WriteLine("Arrays were already imported at program start!");
+            Task1();
             int index = Helpers.intMenu("Choose a file:", filenames_2048);
             switch (index)
             {
@@ -110,13 +116,14 @@
             {
                 string[] menuoptions = 
                 {
-                    "Task 1 - Import 256 length arrays", 
+                    "Task 1 - Import 256 length arrays (also re-imports all arrays)", 
                     "Task 2 - Sort and display digits at interval",
                     "Task 3 - Search for a value in a list (error if not found)",
                     "Task 4 - Search for a value in a list (nearest values if not found)",
                     "Task 5 - Repeat tasks 1-4 with 2048 Length arrays",
                     "Task 6 - Merge arrays and repeat tasks 2-4 on merged arrays",
                     "Task 7 - Repeat task 6 with 2048 Length arrays",
+                    "Change sorting algorithm",
                     "Exit."
                 };
                 switch (Helpers.intMenu("Choose a function:", menuoptions))
@@ -143,6 +150,8 @@
                         Task7();
                         break;
                     case 8:
+                        break;
+                    case 9:
                         exit = true;
                         break;
                 }

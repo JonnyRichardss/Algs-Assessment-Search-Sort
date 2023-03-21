@@ -8,6 +8,7 @@ namespace Algs_Assessment_Search_Sort
 {
     internal static class Algs
     {
+        public static int currentAlg = 1;
         //decided to make these int-only based on the given data for the assessment
         public static int BinarySearch(in int[] array, int lo, int hi, int key, ref int counter)
         {
@@ -65,13 +66,14 @@ namespace Algs_Assessment_Search_Sort
                 return lo;
             }
         }
-        public static int[] SequentialSearch(in int[] array,int key)
+        public static int[] SequentialSearch(in int[] array,int key,ref int counter)
         {
             List<int> foundIndices = new List<int>();
             int nearestindex=0;
             int nearestdistance = int.MaxValue;
             for (int i=0; i<array.Length;i++)
             {
+                counter++;
                 if (array[i] == key)
                 {
                     foundIndices.Add(i);
@@ -94,6 +96,18 @@ namespace Algs_Assessment_Search_Sort
             else
             {
                 return foundIndices.ToArray();
+            }
+        }
+        public static void Sort(ref int[] array, ref int counter)
+        {
+            switch (currentAlg)
+            {
+                case 1:
+                    MergeSort(ref array, ref counter);
+                    break;
+                case 2:
+                    break;
+                //...
             }
         }
         public static void MergeSort(ref int[] array,ref int counter)
