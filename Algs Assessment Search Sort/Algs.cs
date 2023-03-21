@@ -9,10 +9,20 @@ namespace Algs_Assessment_Search_Sort
     internal static class Algs
     {
         //decided to make these int-only based on the given data for the assessment
-        public static int BinarySearchRecursive(in int[] array, int lo, int hi, int key, ref int counter)
+        public static int BinarySearch(in int[] array, int lo, int hi, int key, ref int counter)
         {
-            int mid = (lo + hi) / 2;
             counter++;
+
+            if (key < array[lo])
+            {
+                return -lo;
+            }
+            if (key > array[hi])
+            {
+                return -hi;
+            }
+
+            int mid = (lo + hi) / 2;
             if (lo > hi)
             {
                 return (-mid);
@@ -29,7 +39,7 @@ namespace Algs_Assessment_Search_Sort
                 }
                 else
                 {
-                    return BinarySearchRecursive(array, mid + 1, hi, key, ref counter);
+                    return BinarySearch(array, mid + 1, hi, key, ref counter);
                 }
             }
             else
@@ -40,7 +50,7 @@ namespace Algs_Assessment_Search_Sort
                 }
                 else
                 {
-                    return BinarySearchRecursive(array, lo, mid - 1, key, ref counter);
+                    return BinarySearch(array, lo, mid - 1, key, ref counter);
                 } 
             }
         }
