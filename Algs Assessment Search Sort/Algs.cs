@@ -152,73 +152,47 @@ namespace Algs_Assessment_Search_Sort
         public static int[] Merge(int[] aL, int[] aR,bool asc)
         {
             int[] output = new int[aL.Length + aR.Length];
-            
-            if (asc)
+            int indexL = 0;
+            int indexR = 0;
+            int outputIndex = 0;
+            bool condition;
+            while (indexL < aL.Length && indexR < aR.Length)
             {
-                int indexL = 0;
-                int indexR = 0;
-                int outputIndex = 0;
-                while (indexL < aL.Length && indexR < aR.Length)
+                if (asc)
                 {
-                    if (aL[indexL] < aR[indexR])
-                    {
-                        output[outputIndex] = aL[indexL];
-                        indexL++;
-                        outputIndex++;
-                    }
-                    else
-                    {
-                        output[outputIndex] = aR[indexR];
-                        indexR++;
-                        outputIndex++;
-                    }
+                    condition = aL[indexL]< aR[indexR];
                 }
-                while (indexL < aL.Length)
+                else
+                {
+                    condition = aL[indexL]> aR[indexR];
+                }
+
+                if (condition)
                 {
                     output[outputIndex] = aL[indexL];
                     indexL++;
                     outputIndex++;
                 }
-                while (indexR < aR.Length)
+                else
                 {
                     output[outputIndex] = aR[indexR];
                     indexR++;
                     outputIndex++;
                 }
             }
-            else
+            while (indexL < aL.Length)
             {
-                int indexL = aL.Length-1;
-                int indexR = aR.Length-1;
-                int outputIndex = output.Length-1;
-                while (indexL > 0 && indexR > 0)
-                {
-                    if (aL[indexL] > aR[indexR])
-                    {
-                        output[outputIndex] = aL[indexL];
-                        indexL--;
-                        outputIndex--;
-                    }
-                    else
-                    {
-                        output[outputIndex] = aR[indexR];
-                        indexR--;
-                        outputIndex--;
-                    }
-                }
-                while (indexL > 0)
-                {
-                    output[outputIndex] = aL[indexL];
-                    indexL--;
-                    outputIndex--;
-                }
-                while (indexR > 0)
-                {
-                    output[outputIndex] = aR[indexR];
-                    indexR--;
-                    outputIndex--;
-                }
+                output[outputIndex] = aL[indexL];
+                indexL++;
+                outputIndex++;
             }
+            while (indexR < aR.Length)
+            {
+                output[outputIndex] = aR[indexR];
+                indexR++;
+                outputIndex++;
+            }
+           
             return output;
         }
         public static void QuickSort(ref int[] array,bool asc, ref int counter)
@@ -231,7 +205,34 @@ namespace Algs_Assessment_Search_Sort
         }
         public static void BubbleSort(ref int[] array,bool asc,ref int counter)
         {
-            //iterative bubble sort
+            bool condition;
+            bool swapped = true;
+            int i = 0;
+            while(swapped && i< array.Length)
+            {
+                swapped = false;
+                for (int j = 0; j < array.Length - 1; j++)
+                {
+                    counter++;
+                    if (asc)
+                    {
+                        condition = array[j] > array[j + 1];
+                    }
+                    else
+                    {
+                        condition = array[j] < array[j + 1];
+                    }
+
+                    if (condition)
+                    {
+                        int tempvalue = array[j];
+                        array[j] = array[j + 1];
+                        array[j + 1] = tempvalue;
+                        swapped = true;
+                    }
+                }
+                i++;
+            }
         }
         public static void InsertionSort(ref int[] array,bool asc,ref int counter)
         {
