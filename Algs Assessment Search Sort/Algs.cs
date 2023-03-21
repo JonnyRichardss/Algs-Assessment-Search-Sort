@@ -118,7 +118,7 @@ namespace Algs_Assessment_Search_Sort
                     MergeSort(ref array,asc, ref counter);
                     break;
                 case SortingAlgs.Quick:
-                    QuickSort(ref array, asc, ref counter);
+                    QuickSort(ref array,0,array.Length-1, asc, ref counter);
                     break;
                 case SortingAlgs.Bubble:
                     BubbleSort(ref array, asc, ref counter);
@@ -195,13 +195,45 @@ namespace Algs_Assessment_Search_Sort
            
             return output;
         }
-        public static void QuickSort(ref int[] array,bool asc, ref int counter)
+        public static void QuickSort(ref int[] array,int lo,int hi,bool asc, ref int counter)
         {
-
+            if (lo < hi)
+            {
+                int pivotIndex = Partition(ref array, lo, hi, asc);
+                QuickSort(ref array,lo,pivotIndex-1,asc,ref counter);
+                QuickSort(ref array, pivotIndex + 1, hi, asc, ref counter);
+            }
         }
         public static int Partition(ref int[] array,int lo,int hi, bool asc)
         {
-            return 0;
+            int pivotValue = array[hi]; //pivot value chosen, always using the last value greatly simplifies iteration
+            int i = lo - 1; // I represents the index before the pivot value, the more values we place below where the pivot will be, the higher i gets
+            bool condition;//for asc/desc
+            for (int j = lo; j <= hi; j++)//iterate over the section in question
+            {
+                if (asc)//ascending or descending comparison
+                {
+                    condition = array[j] < pivotValue;//ascending places lower values left of pivot
+                }
+                else 
+                {
+                    condition = array[j] > pivotValue;//descending places higher values left of pivot
+                }
+
+                if (condition)//if array[j] goes left of the pivot
+                {
+                    i++;//move the pivot one right
+                    Swap(ref array, i, j);//place the value left of the pivot
+                }
+            }
+            Swap(ref array, i+1, hi);//place the pivot in its correct spot
+            return i + 1;//return the pivot spot
+        }
+        public static void Swap(ref int[] array, int i1, int i2)
+        {
+            int tempvalue = array[i1];
+            array[i1] = array[i2];
+            array[i2] = tempvalue;
         }
         public static void BubbleSort(ref int[] array,bool asc,ref int counter)
         {
@@ -225,9 +257,7 @@ namespace Algs_Assessment_Search_Sort
 
                     if (condition)
                     {
-                        int tempvalue = array[j];
-                        array[j] = array[j + 1];
-                        array[j + 1] = tempvalue;
+                        Swap(ref array, j, j + 1);
                         swapped = true;
                     }
                 }
@@ -236,9 +266,36 @@ namespace Algs_Assessment_Search_Sort
         }
         public static void InsertionSort(ref int[] array,bool asc,ref int counter)
         {
-
+            int sortedLength = 1;
+            while (sortedLength < array.Length)
+            {
+                int currentValue = array[sortedLength];
+                int i;
+                bool condition;
+                for (i = sortedLength; i > 0; i--)
+                { 
+                    if (asc)
+                    {
+                        condition = currentValue < array[i-1];
+                    }
+                    else
+                    {
+                        condition = currentValue > array[i-1];
+                    }
+                    if (condition)
+                    {
+                        array[i] = array[i-1];
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                array[i] = currentValue;
+                sortedLength++;
+            }
         }
-
+        
         public static void AddEqualNeighbours(ref List<int> equalIndices, in int[] array, int index)
         {
             if (!(equalIndices.Contains(index)))
