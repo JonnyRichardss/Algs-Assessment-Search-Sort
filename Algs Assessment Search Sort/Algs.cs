@@ -34,18 +34,6 @@ namespace Algs_Assessment_Search_Sort
             }
             return -mid;
         }
-        public static int GetClosest(int lo,int hi, int key)
-        {
-            if(key-lo > hi - key)
-            {
-                return hi;
-            }
-            else
-            {
-                return lo;
-            }
-        }
-
         public static void MergeSort(ref int[] array,ref int steps)
         {
             steps++;

@@ -80,7 +80,8 @@ namespace Algs_Assessment_Search_Sort
                 }
                 else
                 {
-                    searchResult = 0 - searchResult;
+                    searchResult =Helpers.GetNearestOfNeighbours(array,Math.Abs(searchResult),searchInput);
+
                     Console.WriteLine("Nearest value {0} found at {1}!", array[searchResult], searchResult);
                 }
             }
