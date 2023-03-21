@@ -150,6 +150,7 @@
                         Task7();
                         break;
                     case 8:
+                        Algs.currentAlg = (SortingAlgs)Helpers.intMenu("Choose sorting algoithm to use",Algs.algNames);
                         break;
                     case 9:
                         exit = true;

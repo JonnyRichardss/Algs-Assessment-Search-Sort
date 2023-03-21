@@ -17,6 +17,7 @@ namespace Algs_Assessment_Search_Sort
     {
         //class of functions that perform array-related actions
         public static SortingAlgs currentAlg = (SortingAlgs)1;
+        public static string[] algNames = { "Merge Sort", "Quick Sort", "Bubble Sort", "Insertion Sort" };
         //decided to make these int-only based on the given data for the assessment
         public static int BinarySearch(in int[] array, int lo, int hi, int key, ref int counter)
         {
