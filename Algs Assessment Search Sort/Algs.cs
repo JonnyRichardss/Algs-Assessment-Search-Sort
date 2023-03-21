@@ -35,7 +35,7 @@ namespace Algs_Assessment_Search_Sort
             {
                 if (mid < array.Length - 1 && array[mid + 1] > key)
                 {
-                    return GetClosest(array, mid, mid + 1, key);
+                    return -GetClosest(array, mid, mid + 1, key);
                 }
                 else
                 {
@@ -46,7 +46,7 @@ namespace Algs_Assessment_Search_Sort
             {
                 if (mid > 0 && array[mid - 1] < key)
                 {
-                    return GetClosest(array, mid-1, mid, key);
+                    return -GetClosest(array, mid-1, mid, key);
                 }
                 else
                 {
