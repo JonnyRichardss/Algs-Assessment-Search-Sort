@@ -50,6 +50,15 @@ namespace Algs_Assessment_Search_Sort
 
         public static void Searching(ref int[] array,bool task3)
         {
+            if (task3)
+            {
+                Console.WriteLine("Task 3 mode - giving error if value not found.");
+            }
+            else
+            {
+                Console.WriteLine("Task 4 mode - giving nearest value if value not found.");
+            }
+            Console.WriteLine("Input an integer to search for:");
             int searchInput = Helpers.intInput();
             int steps = 0;
             int searchResult = -1;
@@ -58,15 +67,8 @@ namespace Algs_Assessment_Search_Sort
             if (!Algs.CheckSorted(array))
             {
                 Console.WriteLine("Array not sorted! Using sequential search.");
-                int[] foundArray = Algs.SequentialSearch(array, searchInput, ref steps);
-                if (foundArray[0] < 0)
-                {
-                    searchResult = foundArray[0];
-                }
-                else
-                {
-                    foundList.AddRange(foundArray);
-                }
+                foundList =  Algs.SequentialSearch(array, searchInput, ref steps);
+                searchResult = foundList[0];
             }
             else
             {
@@ -101,18 +103,17 @@ namespace Algs_Assessment_Search_Sort
         {
 
             Console.WriteLine("Checking if arrays are sorted...");
-            if (Algs.CheckSorted(array1) || Algs.CheckSorted(array2))
+            if (Algs.CheckSorted(array1) && Algs.CheckSorted(array2))
             {
-                Console.WriteLine("Arrays are sorted! Using MergeSort merge!");
+                Console.WriteLine("Arrays are sorted! Using MergeSort merge.");
                 return Algs.Merge(array1, array2,true);
             }
             else
             {
-                Console.WriteLine("One or both arrays not sorted! Using concatenation");
+                Console.WriteLine("One or both arrays not sorted! Using concatenation.");
                 List<int> bothArrays = new List<int>();
                 bothArrays.AddRange(array1);
                 bothArrays.AddRange(array2);
-                //maybe search here idk
                 return bothArrays.ToArray();
                 
             }

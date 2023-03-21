@@ -25,7 +25,7 @@
         }
         static void Task2()
         {
-            int index = Helpers.intMenu("Choose a file to sort and display:", filenames_256);
+            int index = Helpers.intMenu("Task 2 - Choose a file to sort and display:", filenames_256);
             switch (index)
             {
                 case 1:
@@ -41,7 +41,7 @@
         }
         static void Task3()
         {
-            int index = Helpers.intMenu("Choose a file to search:", filenames_256);
+            int index = Helpers.intMenu("Task 3 - Choose a file to search:", filenames_256);
             switch (index)
             {
                 case 1:
@@ -58,7 +58,7 @@
         }
         static void Task4()
         {
-            int index = Helpers.intMenu("Choose a file to search:", filenames_256);
+            int index = Helpers.intMenu("Task 4 - Choose a file to search:", filenames_256);
             switch (index)
             {
                 case 1:
@@ -75,7 +75,7 @@
         static void Task5()
         {
             Task1();
-            int index = Helpers.intMenu("Choose a file:", filenames_2048);
+            int index = Helpers.intMenu("Task 5 - Choose a file:", filenames_2048);
             switch (index)
             {
                 case 1:
@@ -97,6 +97,7 @@
         }
         static void Task6()
         {
+            Console.WriteLine("Task 6 - Merging road1_256 and road3_256");
             int[] mergedarray = Tasks.Merging(road1_256, road3_256);
             Tasks.Sorting(ref mergedarray);
             Tasks.Searching(ref mergedarray, true);
@@ -104,6 +105,7 @@
         }
         static void Task7() 
         {
+            Console.WriteLine("Task 7 - Merging road1_2048 and road3_2048");
             int[] mergedarray = Tasks.Merging(road1_2048, road3_2048);
             Tasks.Sorting(ref mergedarray);
             Tasks.Searching(ref mergedarray, true);

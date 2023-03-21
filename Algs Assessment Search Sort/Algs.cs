@@ -76,7 +76,7 @@ namespace Algs_Assessment_Search_Sort
             }
         }
 
-        public static int[] SequentialSearch(in int[] array,int key,ref int counter)
+        public static List<int> SequentialSearch(in int[] array,int key,ref int counter)
         {
             List<int> foundIndices = new List<int>();
             int nearestindex=0;
@@ -101,11 +101,11 @@ namespace Algs_Assessment_Search_Sort
             }
             if (foundIndices.Count == 0)
             {
-                return new int[] { -nearestindex };
+                return new List<int> { -nearestindex };
             }
             else
             {
-                return foundIndices.ToArray();
+                return foundIndices;
             }
         }
 

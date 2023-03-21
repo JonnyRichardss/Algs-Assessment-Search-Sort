@@ -47,7 +47,6 @@ namespace Algs_Assessment_Search_Sort
             int output = -1;
             while (!validInput)
             {
-                Console.WriteLine("Input an integer:");
                 Console.Write(">");
                 userInput = Console.ReadLine();
                 if (int.TryParse(userInput, out output))
