@@ -53,14 +53,16 @@ namespace Algs_Assessment_Search_Sort
             if (!Helpers.CheckSorted(array))
             {
                 Console.WriteLine("Array not sorted! Sorting array...");
-                int steps = 0;
-                Algs.MergeSort(ref array, ref steps);
-                Console.WriteLine("Merge sorted in {0} steps!", steps);
+                int sortSteps = 0;
+                Algs.MergeSort(ref array, ref sortSteps);
+                Console.WriteLine("Merge sorted in {0} steps!", sortSteps);
             }
 
             Console.WriteLine("Proceeding to binary search!");
             int searchInput = Helpers.intInput();
-            int searchResult = Algs.BinarySearchRecursive(array, searchInput);
+            int searchSteps = 0;
+            int searchResult = Algs.BinarySearchRecursive(array, 0,array.Length-1, searchInput,ref searchSteps);
+            Console.WriteLine("Binary search completed in {0} steps!", searchSteps);
 
             if (searchResult > 0)
             {
@@ -80,8 +82,7 @@ namespace Algs_Assessment_Search_Sort
                 }
                 else
                 {
-                    searchResult =Helpers.GetNearestOfNeighbours(array,Math.Abs(searchResult),searchInput);
-
+                    searchResult = Math.Abs(searchResult);
                     Console.WriteLine("Nearest value {0} found at {1}!", array[searchResult], searchResult);
                 }
             }

@@ -55,9 +55,9 @@ namespace Algs_Assessment_Search_Sort
                 return lo;
             }
         }
-        public static void MergeSort(ref int[] array,ref int steps)
+        public static void MergeSort(ref int[] array,ref int counter)
         {
-            steps++;
+            counter++;
             if(array.Length == 1)
             {
                 return;
@@ -71,8 +71,8 @@ namespace Algs_Assessment_Search_Sort
             Array.Copy(array, 0, lefthalf, 0, i1);
             Array.Copy(array, i1, righthalf, 0, i2);
 
-            MergeSort(ref lefthalf,ref steps);
-            MergeSort(ref righthalf,ref steps);
+            MergeSort(ref lefthalf,ref counter);
+            MergeSort(ref righthalf,ref counter);
             Merge(lefthalf, righthalf).CopyTo(array, 0);
         }
         public static int[] Merge(int[] aL, int[] aR)

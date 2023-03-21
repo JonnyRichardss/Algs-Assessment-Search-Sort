@@ -116,21 +116,5 @@ namespace Algs_Assessment_Search_Sort
                 }
             }
         }
-        public static int GetNearestOfNeighbours(in int[] array, int index,int key)
-        {
-            int[] neighbours = { index - 1, index + 1 };
-
-            int nearestDistance = Math.Abs(array[index]-key);
-            int nearestindex = index;
-            foreach(int neighbour in neighbours)
-            {
-                if (Math.Abs(array[neighbour]-key) < nearestDistance)
-                {
-                    nearestDistance = Math.Abs(array[neighbour]-key);
-                    nearestindex = neighbour;
-                }
-            }
-            return nearestindex;
-        }
     }
 }
