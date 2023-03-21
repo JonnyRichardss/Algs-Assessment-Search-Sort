@@ -6,10 +6,17 @@ using System.Threading.Tasks;
 
 namespace Algs_Assessment_Search_Sort
 {
+    public enum SortingAlgs
+    {
+        Merge =1,
+        Quick =2,
+        Bubble =3,
+        Insertion =4
+    }
     internal static class Algs
     {
         //class of functions that perform array-related actions
-        public static int currentAlg = 1;
+        public static SortingAlgs currentAlg = (SortingAlgs)1;
         //decided to make these int-only based on the given data for the assessment
         public static int BinarySearch(in int[] array, int lo, int hi, int key, ref int counter)
         {
@@ -106,16 +113,16 @@ namespace Algs_Assessment_Search_Sort
         {
             switch (currentAlg)
             {
-                case 1:
+                case SortingAlgs.Merge:
                     MergeSort(ref array,asc, ref counter);
                     break;
-                case 2:
+                case SortingAlgs.Quick:
                     QuickSort(ref array, asc, ref counter);
                     break;
-                case 3:
+                case SortingAlgs.Bubble:
                     BubbleSort(ref array, asc, ref counter);
                     break;
-                case 4:
+                case SortingAlgs.Insertion:
                     InsertionSort(ref array, asc, ref counter);
                     break;
             }

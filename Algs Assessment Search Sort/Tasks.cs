@@ -21,15 +21,15 @@ namespace Algs_Assessment_Search_Sort
                 displayInterval = 50;
             }
             Console.WriteLine("Sorting array...");
-            int steps = 0;
-            Algs.Sort(ref array, true, ref steps);
-            Console.WriteLine("Sorted in {0} steps!", steps);
+            int ascSteps = 0;
+            Algs.Sort(ref array, true, ref ascSteps);
+            Console.WriteLine("{1} sorted ascending in {0} steps!", ascSteps,Algs.currentAlg);
 
-            //this needs changing to a full sort
-            //maybe force heap sort to "reverse" sorted array
             int[] descArray = new int[array.Length];
             array.CopyTo(descArray, 0);
-            Array.Reverse(descArray);
+            int descSteps = 0;
+            Algs.Sort(ref descArray, false, ref descSteps);
+            Console.WriteLine("{1} sorted descending in {0} steps!", descSteps, Algs.currentAlg) ;
 
             string ascendingout = "";
             string descendingout = "";
