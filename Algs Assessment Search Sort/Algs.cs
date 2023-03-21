@@ -8,6 +8,7 @@ namespace Algs_Assessment_Search_Sort
 {
     internal static class Algs
     {
+        //class of functions that perform array-related actions
         public static int currentAlg = 1;
         //decided to make these int-only based on the given data for the assessment
         public static int BinarySearch(in int[] array, int lo, int hi, int key, ref int counter)
@@ -66,6 +67,7 @@ namespace Algs_Assessment_Search_Sort
                 return lo;
             }
         }
+
         public static int[] SequentialSearch(in int[] array,int key,ref int counter)
         {
             List<int> foundIndices = new List<int>();
@@ -98,19 +100,28 @@ namespace Algs_Assessment_Search_Sort
                 return foundIndices.ToArray();
             }
         }
-        public static void Sort(ref int[] array, ref int counter)
+
+
+        public static void Sort(ref int[] array,bool asc, ref int counter)
         {
             switch (currentAlg)
             {
                 case 1:
-                    MergeSort(ref array, ref counter);
+                    MergeSort(ref array,asc, ref counter);
                     break;
                 case 2:
+                    QuickSort(ref array, asc, ref counter);
                     break;
-                //...
+                case 3:
+                    BubbleSort(ref array, asc, ref counter);
+                    break;
+                case 4:
+                    InsertionSort(ref array, asc, ref counter);
+                    break;
             }
         }
-        public static void MergeSort(ref int[] array,ref int counter)
+
+        public static void MergeSort(ref int[] array,bool asc, ref int counter)
         {
             counter++;
             if(array.Length == 1)
@@ -126,44 +137,140 @@ namespace Algs_Assessment_Search_Sort
             Array.Copy(array, 0, lefthalf, 0, i1);
             Array.Copy(array, i1, righthalf, 0, i2);
 
-            MergeSort(ref lefthalf,ref counter);
-            MergeSort(ref righthalf,ref counter);
-            Merge(lefthalf, righthalf).CopyTo(array, 0);
+            MergeSort(ref lefthalf,asc,ref counter);
+            MergeSort(ref righthalf,asc,ref counter);
+            Merge(lefthalf, righthalf,asc).CopyTo(array, 0);
         }
-        public static int[] Merge(int[] aL, int[] aR)
+        public static int[] Merge(int[] aL, int[] aR,bool asc)
         {
             int[] output = new int[aL.Length + aR.Length];
-            int indexL = 0;
-            int indexR = 0;
-            int outputIndex = 0;
-            while (indexL < aL.Length && indexR < aR.Length)
+            
+            if (asc)
             {
-                if (aL[indexL] < aR[indexR])
+                int indexL = 0;
+                int indexR = 0;
+                int outputIndex = 0;
+                while (indexL < aL.Length && indexR < aR.Length)
+                {
+                    if (aL[indexL] < aR[indexR])
+                    {
+                        output[outputIndex] = aL[indexL];
+                        indexL++;
+                        outputIndex++;
+                    }
+                    else
+                    {
+                        output[outputIndex] = aR[indexR];
+                        indexR++;
+                        outputIndex++;
+                    }
+                }
+                while (indexL < aL.Length)
                 {
                     output[outputIndex] = aL[indexL];
                     indexL++;
                     outputIndex++;
                 }
-                else
+                while (indexR < aR.Length)
                 {
                     output[outputIndex] = aR[indexR];
                     indexR++;
                     outputIndex++;
                 }
             }
-            while (indexL < aL.Length)
+            else
             {
-                output[outputIndex] = aL[indexL];
-                indexL++;
-                outputIndex++;
-            }
-            while (indexR < aR.Length)
-            {
-                output[outputIndex] = aR[indexR];
-                indexR++;
-                outputIndex++;
+                int indexL = aL.Length-1;
+                int indexR = aR.Length-1;
+                int outputIndex = output.Length-1;
+                while (indexL > 0 && indexR > 0)
+                {
+                    if (aL[indexL] > aR[indexR])
+                    {
+                        output[outputIndex] = aL[indexL];
+                        indexL--;
+                        outputIndex--;
+                    }
+                    else
+                    {
+                        output[outputIndex] = aR[indexR];
+                        indexR--;
+                        outputIndex--;
+                    }
+                }
+                while (indexL > 0)
+                {
+                    output[outputIndex] = aL[indexL];
+                    indexL--;
+                    outputIndex--;
+                }
+                while (indexR > 0)
+                {
+                    output[outputIndex] = aR[indexR];
+                    indexR--;
+                    outputIndex--;
+                }
             }
             return output;
+        }
+        public static void QuickSort(ref int[] array,bool asc, ref int counter)
+        {
+
+        }
+        public static int Partition(ref int[] array,int lo,int hi, bool asc)
+        {
+            return 0;
+        }
+        public static void BubbleSort(ref int[] array,bool asc,ref int counter)
+        {
+            //iterative bubble sort
+        }
+        public static void InsertionSort(ref int[] array,bool asc,ref int counter)
+        {
+
+        }
+
+        public static void AddEqualNeighbours(ref List<int> equalIndices, in int[] array, int index)
+        {
+            if (!(equalIndices.Contains(index)))
+            {
+                equalIndices.Add(index);
+                try
+                {
+                    if (array[index] == array[index - 1])
+                    {
+                        AddEqualNeighbours(ref equalIndices, array, index - 1);
+                    }
+                }
+                catch (IndexOutOfRangeException)
+                {
+
+                }
+                try
+                {
+                    if (array[index] == array[index + 1])
+                    {
+                        AddEqualNeighbours(ref equalIndices, array, index + 1);
+                    }
+                }
+                catch (IndexOutOfRangeException)
+                {
+
+                }
+            }
+        }
+        public static bool CheckSorted(in int[] array)//checks to see if array is sorted in ascending order
+        {
+            //I chose to use only ascending to simplify the logic
+            //iterate through the array
+            for (int i = 0; i < array.Length - 1; i++)
+            {
+                if (array[i] > array[i + 1])
+                {
+                    return false; //if sorted ascending no value will be greater than the one after it
+                }
+            }
+            return true;
         }
     }
 }

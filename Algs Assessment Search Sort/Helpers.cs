@@ -74,47 +74,5 @@ namespace Algs_Assessment_Search_Sort
 
             return output;
         }
-        public static bool CheckSorted(in int[] array)//checks to see if array is sorted in ascending order
-        {
-            //I chose to use only ascending to simplify the logic
-            //iterate through the array
-            for (int i = 0; i < array.Length-1; i++)
-            {
-                if (array[i] > array[i + 1])
-                {
-                    return false; //if sorted ascending no value will be greater than the one after it
-                }
-            }
-            return true;
-        }
-        public static void AddEqualNeighbours(ref List<int> equalIndices, in int[] array, int index)
-        {
-            if (!(equalIndices.Contains(index)))
-            {
-                equalIndices.Add(index);
-                try
-                {
-                    if (array[index] == array[index - 1])
-                    {
-                        AddEqualNeighbours(ref equalIndices, array, index - 1);
-                    }
-                }
-                catch (IndexOutOfRangeException)
-                {
-
-                }
-                try
-                {
-                    if (array[index] == array[index + 1])
-                    {
-                        AddEqualNeighbours(ref equalIndices, array, index + 1);
-                    }
-                }
-                catch (IndexOutOfRangeException)
-                {
-
-                }
-            }
-        }
     }
 }

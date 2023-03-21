@@ -22,8 +22,8 @@ namespace Algs_Assessment_Search_Sort
             }
             Console.WriteLine("Sorting array...");
             int steps = 0;
-            Algs.Sort(ref array,ref steps);
-            Console.WriteLine("Merge sorted in {0} steps!", steps);
+            Algs.Sort(ref array, true, ref steps);
+            Console.WriteLine("Sorted in {0} steps!", steps);
 
             //this needs changing to a full sort
             //maybe force heap sort to "reverse" sorted array
@@ -55,7 +55,7 @@ namespace Algs_Assessment_Search_Sort
             int searchResult = -1;
             List<int> foundList = new List<int>();
             Console.WriteLine("Checking if array is sorted...");
-            if (!Helpers.CheckSorted(array))
+            if (!Algs.CheckSorted(array))
             {
                 Console.WriteLine("Array not sorted! Using sequential search.");
                 int[] foundArray = Algs.SequentialSearch(array, searchInput, ref steps);
@@ -72,7 +72,7 @@ namespace Algs_Assessment_Search_Sort
             {
                 Console.WriteLine("Array Sorted! Using binary search.");
                 searchResult = Algs.BinarySearch(array, 0, array.Length - 1, searchInput, ref steps);
-                Helpers.AddEqualNeighbours(ref foundList, array, searchResult);
+                Algs.AddEqualNeighbours(ref foundList, array, searchResult);
             }
             Console.WriteLine("Search completed in {0} steps!", steps);
             if (searchResult > 0)
@@ -99,22 +99,25 @@ namespace Algs_Assessment_Search_Sort
 
         public static int[] Merging(int[] array1, int[] array2)
         {
+
             Console.WriteLine("Checking if arrays are sorted...");
-            if (!Helpers.CheckSorted(array1))
+            if (Algs.CheckSorted(array1) || Algs.CheckSorted(array2))
             {
-                Console.WriteLine("Array 1 not sorted! Sorting array...");
-                int steps = 0;
-                Algs.MergeSort(ref array1, ref steps);
-                Console.WriteLine("Merge sorted in {0} steps!", steps);
+                Console.WriteLine("Arrays are sorted! Using MergeSort merge!");
+                return Algs.Merge(array1, array2,true);
             }
-            if (!Helpers.CheckSorted(array2))
+            else
             {
-                Console.WriteLine("Array 2 not sorted! Sorting array...");
-                int steps = 0;
-                Algs.MergeSort(ref array2, ref steps);
-                Console.WriteLine("Merge sorted in {0} steps!", steps);
+                Console.WriteLine("One or both arrays not sorted! Using concatenation");
+                List<int> bothArrays = new List<int>();
+                bothArrays.AddRange(array1);
+                bothArrays.AddRange(array2);
+                //maybe search here idk
+                return bothArrays.ToArray();
+                
             }
-            return Algs.Merge(array1, array2);
+            
+            
         }
     }
 }
