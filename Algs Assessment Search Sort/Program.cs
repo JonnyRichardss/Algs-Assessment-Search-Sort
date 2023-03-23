@@ -14,6 +14,8 @@
         static int[] road2_2048 = Helpers.ReadFile(filenames_2048[1]);
         static int[] road3_2048 = Helpers.ReadFile(filenames_2048[2]);
         
+        //All of these are simple and self explanatory, they simply take a choice of array (where appropriate) and call the relevant functions from Tasks with them.
+        //I did try iterative and other dynamic approaches to switching choice of array but all of them ran into strange things when passed by reference.
         static void Task1()
         {
             Console.WriteLine("Task 1 - Re-Importing arrays!");
@@ -112,61 +114,74 @@
             Tasks.Searching(ref mergedarray, true);
             Tasks.Searching(ref mergedarray, false);
         }
+        static void SwitchAlg()
+        {
+            //function to switch currently used algorithm
+            int userInput = Helpers.intMenu("Choose sorting algoithm to use", Algs.algNames);//presents user with existing algorithms
+            Algs.currentAlg = (SortingAlgs)userInput;//sets the enum
+        }
         static void PrintAllSteps()
         {
+            //function that outputs the steps vs n table
+
+            //generate a random value to search for in tests
             Random rand = new Random();
             int searchValue = rand.Next(0, 500);
             Console.WriteLine("Randomly chosen search number between 0 and 500:{0}!", searchValue);
-            
+
+            //hard-coded top of table
             Console.WriteLine("    N=    |    256    |    256    |    256    |    2048   |    2048   |    2048   |    512    |    4096   |");
             Console.WriteLine("Algorithm |Road_1_256 |Road_2_256 |Road_3_256 |Road_1_2048|Road_2_2048|Road_3_2048|256 Merged |2048 Merged|");
             Console.WriteLine("-----------------------------------------------------------------------------------------------------------");
 
+
             List<int[]> allarrays = new List<int[]>();
-            for (int a = 1; a < 5; a++)
+            for (int a = 1; a < 5; a++)//iterate over all possible sorting algorithms
             {
                 Algs.currentAlg = (SortingAlgs)a;
 
+                //read in all arrays separately
                 allarrays.Clear();
                 allarrays = Helpers.ReadMultiFiles(allfilenames);
                 allarrays.Add(Tasks.Merging(road1_256, road3_256, true));
                 allarrays.Add(Tasks.Merging(road1_2048, road3_2048, true));
+                //for some unknown reason clearing and re-reading the arrays every time was the only way to get them to reset, I couldn't figure out how to copy by value and weird references hung around and modified the original list
+
 
                 List<int> results = new List<int>();
-                for (int i = 0; i < allarrays.Count; i++)
+                for (int i = 0; i < allarrays.Count; i++) //iterate over all arrays, including merged ones
                 {
                     
                     int counter = 0;
                     int[] currentArray = allarrays[i];
-                    Algs.Sort(ref currentArray, true, ref counter);
-                    results.Add(counter);
+                    Algs.Sort(ref currentArray, true, ref counter);//run current sorting algorithm on array
+                    results.Add(counter);//all we care about is the step counter
                 }
-                Console.WriteLine("{0,-10}|{1}", Algs.currentAlg, Helpers.FormatSteps(results));
+                Console.WriteLine("{0,-10}|{1}", Algs.currentAlg, Helpers.FormatSteps(results)); //output the row for the current sorting algorithm
             }
+            //both searches are done at once since they won't affect each other's results
             List<int> binResults = new List<int>();
             List<int> seqResults = new List<int>();
-            foreach (int[] array in allarrays) 
+            foreach (int[] array in allarrays) //iterate over all arrays, including merged ones
             {
                 int binCounter = 0;
                 int seqCounter = 0;
-                Algs.BinarySearch(array, 0, array.Length-1, 55, ref binCounter);
-                Algs.SequentialSearch(array,55,ref seqCounter);
+                Algs.BinarySearch(array, 0, array.Length-1, 55, ref binCounter);//the binary search requires a sorted array
+                Algs.SequentialSearch(array,55,ref seqCounter);//the sequential search has no way to exit unless it has checked the whole array so worst case is guaranteed
                 binResults.Add(binCounter);
                 seqResults.Add(seqCounter);
             }
+            //displaying search rows
             Console.WriteLine("Binary    |{0}", Helpers.FormatSteps(binResults));
             Console.WriteLine("Sequential|{0}", Helpers.FormatSteps(seqResults));
         }
         static void Main(string[] args)
         {
-            foreach(string s in allfilenames)
-            {
-                Console.Write("|{0}", s.Split(".")[0]);
-            }
-            Console.WriteLine();
+            //main entry point of program
             bool exit = false;
-            while (!exit)
+            while (!exit) //loop until user decides to exit
             {
+                //creating menu
                 string[] menuoptions =
                 {
                     "Task 1 - Import 256 length arrays (also re-imports all arrays)",
@@ -180,6 +195,7 @@
                     "Extra - Ouput all steps vs n",
                     "Exit."
                 };
+                //cases for every menu option to use
                 switch (Helpers.intMenu("Choose a function:", menuoptions))
                 {
                     case 1:
@@ -204,7 +220,7 @@
                         Task7();
                         break;
                     case 8:
-                        Algs.currentAlg = (SortingAlgs)Helpers.intMenu("Choose sorting algoithm to use",Algs.algNames);
+                        SwitchAlg();
                         break;
                     case 9:
                         PrintAllSteps();
