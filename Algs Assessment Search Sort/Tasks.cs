@@ -99,18 +99,18 @@ namespace Algs_Assessment_Search_Sort
             }
         }
 
-        public static int[] Merging(int[] array1, int[] array2)
+        public static int[] Merging(int[] array1, int[] array2,bool silent)
         {
 
-            Console.WriteLine("Checking if arrays are sorted...");
+            if (!silent)Console.WriteLine("Checking if arrays are sorted...");
             if (Algs.CheckSorted(array1) && Algs.CheckSorted(array2))
             {
-                Console.WriteLine("Arrays are sorted! Using MergeSort merge.");
+                if (!silent) Console.WriteLine("Arrays are sorted! Using MergeSort merge.");
                 return Algs.Merge(array1, array2,true);
             }
             else
             {
-                Console.WriteLine("One or both arrays not sorted! Using concatenation.");
+                if (!silent) Console.WriteLine("One or both arrays not sorted! Using concatenation.");
                 List<int> bothArrays = new List<int>();
                 bothArrays.AddRange(array1);
                 bothArrays.AddRange(array2);

@@ -73,5 +73,30 @@ namespace Algs_Assessment_Search_Sort
 
             return output;
         }
+        public static List<int[]> ReadMultiFiles(string[] paths)
+        {
+            List<int[]> output = new List<int[]>();
+            foreach (string path in paths)
+            {
+                output.Add(ReadFile(path));
+            }
+            return output;
+        }
+        public static string FormatSteps(List<int> results)
+        {
+            string output = "";
+            int targetlen = 10;
+            foreach(int i in results)
+            {
+                int ilen = i.ToString().Length;
+                int remaininglen = targetlen - ilen;
+                //this looks a little silly but I wasn't even going to add this feature so i dont care rn
+                string left = new string(' ', remaininglen/2)+" ";
+                string right = new string(' ', remaininglen - (left.Length-1))+"|";
+
+                output = output + left+i+right;
+            }
+            return output;
+        }
     }
 }
