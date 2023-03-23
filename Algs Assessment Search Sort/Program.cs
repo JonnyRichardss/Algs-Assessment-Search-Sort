@@ -114,34 +114,38 @@
         }
         static void PrintAllSteps()
         {
-            List<int[]> allarrays = Helpers.ReadMultiFiles(allfilenames);
-            allarrays.Add(Tasks.Merging(road1_256, road3_256, true));
-            allarrays.Add(Tasks.Merging(road1_2048, road3_2048, true));
-            int[][] arraysCopy = new int[allarrays.Count][];
+            
+            List<int[]> allarrays = new List<int[]>();
             Console.WriteLine("    N=    |    256    |    256    |    256    |    2048   |    2048   |    2048   |    512    |    4096   |");
             Console.WriteLine("Algorithm |Road_1_256 |Road_2_256 |Road_3_256 |Road_1_2048|Road_2_2048|Road_3_2048|256 Merged |2048 Merged|");
-            
-            
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------------");
+
+
             for (int a = 1; a < 5; a++)
             {
                 Algs.currentAlg = (SortingAlgs)a;
-                allarrays.CopyTo(arraysCopy);
+                allarrays.Clear();
+                allarrays = Helpers.ReadMultiFiles(allfilenames);
+                allarrays.Add(Tasks.Merging(road1_256, road3_256, true));
+                allarrays.Add(Tasks.Merging(road1_2048, road3_2048, true));
+
                 List<int> results = new List<int>();
-                for (int i = 0; i < arraysCopy.Length; i++)
+                for (int i = 0; i < allarrays.Count; i++)
                 {
+                    int[] currentArray = allarrays[i];
                     int counter = 0;
-                    Algs.Sort(ref arraysCopy[i], false, ref counter);
+                    Algs.Sort(ref currentArray, true, ref counter);
                     results.Add(counter);
                 }
                 Console.WriteLine("{0,-10}|{1}", Algs.currentAlg, Helpers.FormatSteps(results));
             }
             List<int> binResults = new List<int>();
             List<int> seqResults = new List<int>();
-            foreach (int[] array in arraysCopy) 
+            foreach (int[] array in allarrays) 
             {
                 int binCounter = 0;
                 int seqCounter = 0;
-                Algs.BinarySearch(array, 0, array.Length, 55, ref binCounter);
+                Algs.BinarySearch(array, 0, array.Length-1, 55, ref binCounter);
                 Algs.SequentialSearch(array,55,ref seqCounter);
                 binResults.Add(binCounter);
                 seqResults.Add(seqCounter);

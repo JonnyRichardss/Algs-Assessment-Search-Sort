@@ -273,7 +273,8 @@ namespace Algs_Assessment_Search_Sort
                 int i;
                 bool condition;
                 for (i = sortedLength; i > 0; i--)
-                { 
+                {
+                    counter++;
                     if (asc)
                     {
                         condition = currentValue < array[i-1];
