@@ -131,7 +131,6 @@ namespace Algs_Assessment_Search_Sort
 
         public static void MergeSort(ref int[] array,bool asc, ref int counter)
         {
-            counter++;
             if(array.Length == 1)
             {
                 return;
@@ -147,9 +146,9 @@ namespace Algs_Assessment_Search_Sort
 
             MergeSort(ref lefthalf,asc,ref counter);
             MergeSort(ref righthalf,asc,ref counter);
-            Merge(lefthalf, righthalf,asc).CopyTo(array, 0);
+            Merge(lefthalf, righthalf,asc,ref counter).CopyTo(array, 0);
         }
-        public static int[] Merge(int[] aL, int[] aR,bool asc)
+        public static int[] Merge(int[] aL, int[] aR,bool asc,ref int counter)
         {
             int[] output = new int[aL.Length + aR.Length];
             int indexL = 0;
@@ -158,6 +157,7 @@ namespace Algs_Assessment_Search_Sort
             bool condition;
             while (indexL < aL.Length && indexR < aR.Length)
             {
+                counter++;
                 if (asc)
                 {
                     condition = aL[indexL]< aR[indexR];
@@ -182,12 +182,14 @@ namespace Algs_Assessment_Search_Sort
             }
             while (indexL < aL.Length)
             {
+                counter++;
                 output[outputIndex] = aL[indexL];
                 indexL++;
                 outputIndex++;
             }
             while (indexR < aR.Length)
             {
+                counter++;
                 output[outputIndex] = aR[indexR];
                 indexR++;
                 outputIndex++;
@@ -199,18 +201,19 @@ namespace Algs_Assessment_Search_Sort
         {
             if (lo < hi)
             {
-                int pivotIndex = Partition(ref array, lo, hi, asc);
+                int pivotIndex = Partition(ref array, lo, hi, asc,ref counter);
                 QuickSort(ref array,lo,pivotIndex-1,asc,ref counter);
                 QuickSort(ref array, pivotIndex + 1, hi, asc, ref counter);
             }
         }
-        public static int Partition(ref int[] array,int lo,int hi, bool asc)
+        public static int Partition(ref int[] array,int lo,int hi, bool asc,ref int counter)
         {
             int pivotValue = array[hi]; //pivot value chosen, always using the last value greatly simplifies iteration
             int i = lo - 1; // I represents the index before the pivot value, the more values we place below where the pivot will be, the higher i gets
             bool condition;//for asc/desc
             for (int j = lo; j <= hi; j++)//iterate over the section in question
             {
+                counter++;
                 if (asc)//ascending or descending comparison
                 {
                     condition = array[j] < pivotValue;//ascending places lower values left of pivot

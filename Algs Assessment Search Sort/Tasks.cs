@@ -106,7 +106,8 @@ namespace Algs_Assessment_Search_Sort
             if (Algs.CheckSorted(array1) && Algs.CheckSorted(array2))
             {
                 if (!silent) Console.WriteLine("Arrays are sorted! Using MergeSort merge.");
-                return Algs.Merge(array1, array2,true);
+                int dummycounter = 0;
+                return Algs.Merge(array1, array2,true,ref dummycounter);
             }
             else
             {
